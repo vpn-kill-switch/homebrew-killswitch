@@ -2,7 +2,7 @@ class Killswitch < Formula
   desc "create & load a kill-switch pf.conf"
   homepage "https://vpn-kill-switch.com/"
   url "https://github.com/vpn-kill-switch/killswitch.git",
-      :tab => "0.2.2",
+      :tag => "0.2.2",
       :revision => "fcf5a53b5ed9c56c75a91190665fa946f783ac96"
 
   head "https://github.com/vpn-kill-switch/killswitch.git"
