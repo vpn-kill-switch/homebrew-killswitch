@@ -3,7 +3,7 @@ class Killswitch < Formula
   homepage "https://vpn-kill-switch.com/"
   url "https://github.com/vpn-kill-switch/killswitch.git",
       :tag => "0.4.0",
-      :revision => "94cefac2f225354c604e8f77f777dec6bf4bd225"
+      :revision => "5dadfe24354a49eef030c6fa27fb32486676fa2c"
 
   head "https://github.com/vpn-kill-switch/killswitch.git"
 
