@@ -18,8 +18,13 @@ class Killswitch < Formula
   depends_on "go" => :build
 
   go_resource "github.com/miekg/dns" do
-      url "https://github.com/miekg/dns.git",
-          :revision => "e4205768578dc90c2669e75a2f8a8bf77e3083a4"
+    url "https://github.com/miekg/dns.git",
+        :revision => "e4205768578dc90c2669e75a2f8a8bf77e3083a4"
+  end
+
+  go_resource "golang.org/x/net" do
+    url "https://go.googlesource.com/net.git",
+        :revision => "1c05540f6879653db88113bc4a2b70aec4bd491f"
   end
 
   def install
