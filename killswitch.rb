@@ -1,10 +1,11 @@
+require "language/go"
+
 class Killswitch < Formula
   desc "create & load a kill-switch pf.conf"
   homepage "https://vpn-kill-switch.com/"
   url "https://github.com/vpn-kill-switch/killswitch.git",
-      :tag => "0.4.1",
-      :revision => "67fe9c1f186d1f52880bb9b4ab7d5119e589f947"
-
+      :tag => "0.4.2",
+      :revision => "763f87a995141fef1372dd8dff8f57ee28baeded"
   head "https://github.com/vpn-kill-switch/killswitch.git"
 
   bottle do
@@ -16,12 +17,18 @@ class Killswitch < Formula
 
   depends_on "go" => :build
 
+  go_resource "github.com/miekg/dns" do
+      url "https://github.com/miekg/dns.git",
+          :revision => "e4205768578dc90c2669e75a2f8a8bf77e3083a4"
+  end
+
   def install
     ENV["GOPATH"] = buildpath
     (buildpath/"src/github.com/vpn-kill-switch/killswitch").install buildpath.children
+    Language::Go.stage_deps resources, buildpath/"src"
     cd "src/github.com/vpn-kill-switch/killswitch" do
-      system "make"
-      bin.install "killswitch"
+      ldflags = "-s -w -X main.version=#{version}"
+      system "go", "build", "-ldflags", ldflags, "-o", "#{bin}/killswitch", "cmd/killswitch/main.go"
     end
   end
 
