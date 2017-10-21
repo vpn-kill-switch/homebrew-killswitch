@@ -5,7 +5,7 @@ class Killswitch < Formula
   homepage "https://vpn-kill-switch.com/"
   url "https://github.com/vpn-kill-switch/killswitch.git",
       :tag => "0.4.2",
-      :revision => "763f87a995141fef1372dd8dff8f57ee28baeded"
+      :revision => "4eb3b3f94a22b713d96aa376249d9b563d97051a"
   head "https://github.com/vpn-kill-switch/killswitch.git"
 
   bottle do
