@@ -1,7 +1,7 @@
 class Killswitch < Formula
   desc "Create & load a kill-switch pf.conf"
   homepage "https://vpn-kill-switch.com/"
-  url "https://github.com/vpn-kill-switch/killswitch.git", :tag => "0.7.0", :revision => "b8e11177666f92608020133b07978ce09d0b615e"
+  url "https://github.com/vpn-kill-switch/killswitch.git", :tag => "0.7.1", :revision => "5a2a02aa0bff87a05d6d75a978e7addfcc1beed6"
   head "https://github.com/vpn-kill-switch/killswitch.git"
 
   bottle do
@@ -11,20 +11,13 @@ class Killswitch < Formula
     sha256 "d9f076f1c3010e57e77bb583ba63855f1db92e8fb0cd432cfefe79ce0d26d9b5" => :sierra
   end
 
-  depends_on "dep" => :build
   depends_on "go" => :build
 
   def install
-    ENV["GOPATH"] = buildpath
-    (buildpath/"src/github.com/vpn-kill-switch/killswitch").install buildpath.children
-    cd "src/github.com/vpn-kill-switch/killswitch" do
-      system "dep", "ensure", "-vendor-only"
-      ldflags = "-s -w -X main.version=#{version}"
-      system "go", "build", "-ldflags", ldflags, "-o", "#{bin}/killswitch", "cmd/killswitch/main.go"
-    end
+    system "go", "build", "-mod=vendor", "-ldflags", "-s -w -X main.version=#{version}", "-o", "#{bin}/killswitch", "cmd/killswitch/main.go"
   end
 
   test do
-    system bin/"killswitch", "-v"
+    system "#{bin}/killswitch", "-v"
   end
 end
