@@ -14,10 +14,10 @@ class Killswitch < Formula
   depends_on "go" => :build
 
   def install
-    system "go", "build", "-mod=vendor", "-ldflags", "-s -w -X main.version=#{version}", "-o", "#{bin}/killswitch", "cmd/killswitch/main.go"
+    system "go", "build", "-mod=readonly", "-ldflags", "-s -w -X main.version=#{version}", "-o", "#{bin}/killswitch", "cmd/killswitch/main.go"
   end
 
   test do
-    system "#{bin}/killswitch", "-v"
+    assert_match "No VPN interface found", shell_output("#{bin}/killswitch 2>&1", 1)
   end
 end
